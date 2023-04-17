@@ -22,6 +22,12 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/events", require("./routes/events"));
 
+// comodin para que cualquier ruta que no sean las de arriba, va a servir el archivo index
+// el archivo index tiene la conf. de react router dom para saber que hacer
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
 // Escuchar peticiones
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
